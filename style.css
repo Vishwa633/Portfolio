@@ -1387,9 +1387,6 @@ main{
 }
 
 
-
-
-
 .project-card {
     position: relative;
     border-width: 1px;
@@ -1404,7 +1401,7 @@ main{
 .card-p4 { border-color: rgba(0, 180, 216, 0.3); }
 .card-p5 { border-color: rgba(157, 78, 221, 0.3); }
 
-/* 2. Hover කරාම Glow වෙන හැටි */
+
 .card-p1:hover { border-color: rgba(255, 77, 109, 1); box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); transform: translateY(-8px);}
 .card-p2:hover { border-color: rgba(6, 214, 160, 1); box-shadow: 0 0 15px rgba(6, 214, 160, 0.4); transform: translateY(-8px);}
 .card-p3:hover { border-color: rgba(255, 209, 102, 1); box-shadow: 0 0 15px rgba(255, 209, 102, 0.4); transform: translateY(-8px);}
@@ -1417,20 +1414,235 @@ main{
 
 .projects-grid {
     display: flex;
-    flex-wrap: wrap;          /* කාඩ්ස් 3ක් පිරුණම අනිත් ඒවා යටට යවනවා */
-    justify-content: center;  /* මේකෙන් තමයි ඔක්කොම මැද්දට ගන්නේ */
+    flex-wrap: wrap;         
+    justify-content: center;  
     gap: 2rem;
     padding: 2rem;
-    max-width: 1250px;        /* කාඩ්ස් 3ක පළල (380*3 + gaps) */
+    max-width: 1250px;       
     margin: 0 auto;
 }
 
 .project-card {
-    flex: 0 0 374px;          /* හැම කාඩ් එකකම පළල 380px වෙනවා */
+    flex: 0 0 374px;        
     max-width: 380px;
     transition: all 0.4s ease;
 }
 
+/* Contact Section Main Container */
+.contact-section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Grid/Flex Layout for Form and 3D Spline */
+.contact-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 3rem;
+    margin-top: 3rem;
+    flex-wrap: wrap; 
+}
+
+/* Glassmorphism Contact Form Card */
+.contact-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.7rem; 
+}
+
+.input-group label { 
+    color: #a2a8b4; 
+    font-size: 0.85rem; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input, textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    color: white;
+    outline: none;
+    transition: 0.4s ease;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    border-color: #9d4edd;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
+}
+
+/* Send Button Style */
+.send-btn {
+    background: linear-gradient(135deg, #9d4edd, #7f42a7);
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.send-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
+}
+
+/* Spline Container - Background removed to match theme */
+.contact-3d {
+    flex: 1; 
+    min-width: 500px; 
+    max-width: 600px; 
+    min-height: 500px;
+    border-radius: 24px;
+    overflow: hidden; 
+    position: relative;
+    background: transparent !important;
+    
+    margin-left: 2rem; 
+    transform: scale(1.1); 
+    transform-origin: left center;
+}
+
+.contact-3d iframe {
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+    border: none !important;
+    transform: scale(1.05);
+}
+
+/* Responsive adjustment for Mobile/Tablets */
+@media (max-width: 850px) {
+    .contact-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-card, .contact-3d {
+        width: 100%;
+    }
+}
+
+.contact-3d::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px; 
+    height: 50px;
+    background: #000; 
+    pointer-events: none;
+}
+
+.contact-subtext {
+    color: #a2a8b4;
+    font-size: 1rem;
+    margin-top: 1rem;
+    max-width: 500px; 
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
 
 
+.footer-section {
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
 
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 3rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    transition: 0.4s;
+}
+
+.info-card i { font-size: 1.5rem; color: #9d4edd; margin-bottom: 10px; display: block; }
+.info-card span { font-size: 0.7rem; letter-spacing: 2px; color: #a2a8b4; }
+.info-card p { margin-top: 5px; font-weight: 600; }
+
+/* Social Links Style */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    color: white;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #9d4edd;
+    transform: translateY(-5px);
+}
+
+/* 1. Email Card - Purple Border */
+.info-card:nth-child(1) {
+    border: 1px solid #ffd60a;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+}
+
+/* 2. University Card - Blue Border */
+.info-card:nth-child(2){
+    border: 1px solid #4ea8de;
+    box-shadow: 0 0 15px rgba(78, 168, 222, 0.3);
+}
+
+/* 3. Location Card - Pink Border */
+.info-card:nth-child(3) {
+    border: 1px solid #ff4d6d;
+    box-shadow: 0 0 15px rgba(255, 77, 109, 0.3);
+}
+
+/* 4. Resume Card - Cyan Border */
+.info-card:nth-child(4) {
+    border: 1px solid #00f5d4;
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+}
+
+.info-card:nth-child(1) i { color: #ffd60a; }
+.info-card:nth-child(2) i { color: #4ea8de; }
+.info-card:nth-child(3) i { color: #ff4d6d; }
+.info-card:nth-child(4) i { color: #00f5d4; }
+
+a {
+    text-decoration: none;
+}
+
+.pdf{
+    color: white;
+}
