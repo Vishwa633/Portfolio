@@ -1,0 +1,160 @@
+body, html { margin: 0; padding: 0; background: #0a0612; }
+
+.coming-soon-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden; /* Scroll වීම වැළැක්වීමට */
+}
+
+/* Progress Bar */
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: #9d4edd;
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* රොබෝව ඉන්න Container එක - මෙන්න මේ ටික මාරු කරන්න */
+/* රොබෝ ඉන්න Container එක - මෙතන බලන්න */
+.robo-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+    
+    /* රොබෝගේ container එකට Glow එක දෙමු */
+    /* මෙතන තමයි සූත්‍රය තියෙන්නේ - මේකෙන් box එකක් වගේ පේන්නේ නැහැ, ලස්සනට spread වෙනවා */
+    box-shadow: 0 0 100px 50px rgba(157, 78, 221, 0.3), 0 0 200px 100px rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.glow-effect {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(157, 78, 221, 0.6) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(0,0,0,0) 70%);
+    filter: blur(60px);
+    z-index: 0;
+    
+    /* හරියටම මැද්දට - මේක අනිවාර්යයෙන්ම දාන්න */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    animation: flash-pulse 3s infinite;
+}
+
+/* iframe එක ඇතුලේ රොබෝව අල්ලන්න */
+.robo-container iframe {
+    position: relative;
+    z-index: 1; 
+    width: 100%;
+    height: 100%;
+    border: none;
+    transform: scale(1.2) translateX(35px) translateY(10px);
+}
+
+/* Glow එක තව පැහැදිලි කරන්න */
+.robo-container::before {
+    display: none;
+}
+
+/* Back Button */
+.back-btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    border: 2px solid #9d4edd;
+    color: white;
+    background: transparent;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #9d4edd;
+    box-shadow: 0 0 20px #9d4edd;
+}
+
+
+
+/* මේකෙන් Spline ලෝගෝ එක තියෙන පල්ලෙහා කොටස වහන්න පුළුවන් */
+.robo-container::after {
+    display: none;
+    
+}
+
+/* Flash එකේ Pulse එක */
+@keyframes flash-pulse {
+    0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+}
+
+.snow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    
+    /* මෙතන gradient පේළි 12ක් විතර දාලා තියෙනවා - මේකෙන් හිම කැට ගොඩක් පේනවා */
+    background-image: 
+        radial-gradient(2px 2px at 10% 10%, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 20% 50%, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 30% 90%, #fff, rgba(0,0,0,0)),
+        radial-gradient(4px 4px at 40% 30%, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50% 10%, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 60% 70%, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 70% 20%, #fff, rgba(0,0,0,0)),
+        radial-gradient(4px 4px at 80% 80%, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 90% 50%, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 15% 70%, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 85% 25%, #fff, rgba(0,0,0,0)),
+        radial-gradient(4px 4px at 50% 90%, #fff, rgba(0,0,0,0));
+    
+    background-repeat: repeat;
+    animation: snow-fall 3s linear infinite;
+    z-index: 0;
+}
+
+@keyframes snow-fall {
+    0% { background-position: 0px 0px; }
+    100% { background-position: 100px 200px; } /* මේකෙන් හිම කැට චලනය වෙනවා */
+}
+
+/* Spline ලෝගෝ එක සම්පූර්ණයෙන්ම වහන්න */
+.robo-container {
+    position: relative;
+    overflow: hidden; /* මේකෙන් අත්‍යවශ්‍යයි - ලෝගෝ එක container එකෙන් එළියට යන එක වළකනවා */
+}
+
+/* මේකෙන් ලෝගෝ එක ඉන්න හරිය වහනවා */
+.robo-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px; /* ලෝගෝ එකේ පළල */
+    height: 50px; /* ලෝගෝ එකේ උස */
+    background: #0a0612; /* ඔයාගේ Background එකේ පාටම දෙන්න */
+    z-index: 10; /* අනිත් ඔක්කොටම උඩින් තියන්න */
+    pointer-events: none;
+}

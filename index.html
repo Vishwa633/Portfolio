@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishwa Nethsara | AI Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <canvas id="snowCanvas"></canvas>
+
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <div class="loading-text">INITIALIZING AI SYSTEM...</div>
+        </div>
+    </div>
+
+    <img class="image-gradient" src="gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+
+    <div class="container">
+        <header>
+            
+            <div data-aos="fade-down" data-aos-duration="1500" class="logo-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="url(#ai-gradient)" stroke="#9d4edd" stroke-width="1.5"/>
+                    <defs>
+                        <linearGradient id="ai-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="100%" stop-color="#7f42a7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>VISHWA</span>
+            </div>
+
+            <nav>
+                <a data-aos="fade-down" data-aos-duration="1500" href="#about">ABOUT</a>
+                <a data-aos="fade-down" data-aos-duration="2000" href="#projects">PROJECTS</a>
+                <a data-aos="fade-down" data-aos-duration="2500" href="#skills">SKILLS</a>
+                <a data-aos="fade-down" data-aos-duration="3000" href="#contsct">CONTACT</a>
+            </nav>
+
+            <button data-aos="fade-down" data-aos-duration="1500" class="btn-signing">RESUME</button>
+        </header>
+
+        <main>
+            <div class="content">
+            
+                <div data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="1500" class="tag-box">
+                    <div class="tag">PORTFOLIO</div>
+                </div>
+
+                <h1 data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="2000">VISHWA<br>NETHSARA</h1>
+                
+                <h5 data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="2000" class="ai-title">ARTIFICIAL INTELLIGENCE</h5>
+
+                <p data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="2100" class="description">
+                    Specializing in Artificial Intelligence and Machine learning, while bridging the gap between smart data models and full-stack web applications
+                </p>
+
+                <div data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="2200" class="buttons">
+                    <a href="https://www.linkedin.com/in/vishwa-nethsara-00a0a3372/" target="_blank" class="btn-get-started">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/Vishwa633" target="_blank" class="btn-signing-main">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    
+                </div>
+            </div>
+        </main>
+
+        <spline-viewer data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" data-aos-duration="3000" class="robot-3d" url="https://prod.spline.design/XxTRTImXhj-7cSPR/scene.splinecode"></spline-viewer>
+    </div>
+
+    
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.94/build/spline-viewer.js"></script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            
+            setTimeout(() => {
+                preloader.classList.add('preloader-hidden');
+                
+                setTimeout(() => {
+                    AOS.init();
+                    
+                    initSnow(); 
+                }, 500);
+                
+            }, 1000);
+        });
+
+        // --- 3D SNOW EFFECT LOGIC ---
+        function initSnow() {
+            const canvas = document.getElementById('snowCanvas');
+            const ctx = canvas.getContext('2d');
+
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const numFlakes = 70; 
+            const flakes = [];
+
+            for (let i = 0; i < numFlakes; i++) {
+                flakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 3.5 + 0.5, 
+                    d: Math.random() * numFlakes, 
+                    speed: Math.random() * 1 + 0.5 
+                });
+            }
+
+            
+            function drawFlakes() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; 
+                ctx.beginPath();
+
+                for (let i = 0; i < numFlakes; i++) {
+                    const f = flakes[i];
+                    ctx.moveTo(f.x, f.y);
+                    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+                }
+                ctx.fill();
+                moveFlakes();
+            }
+
+            
+            function moveFlakes() {
+                for (let i = 0; i < numFlakes; i++) {
+                    const f = flakes[i];
+                    
+                    f.y += f.speed; 
+                    f.x += Math.sin(f.d) * 0.5; 
+
+                    
+                    if (f.y > canvas.height) {
+                        flakes[i] = {
+                            x: Math.random() * canvas.width,
+                            y: -10,
+                            r: f.r,
+                            d: f.d,
+                            speed: f.speed
+                        };
+                    }
+                    
+                    
+                    if (f.x > canvas.width + 5 || f.x < -5) {
+                        flakes[i].x = Math.random() * canvas.width;
+                    }
+
+                    f.d += 0.01; 
+                }
+            }
+
+           
+            function animate() {
+                drawFlakes();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+
+    <section id="about" class="about-section">
+    
+    <div class="section-heading" data-aos="fade-right" data-aos-duration="1200">
+        <span class="sub-title">Introduction</span>
+        <h2 class="main-title">About Me.</h2>
+    </div>
+
+    <p class="about-description" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="200">
+        I am a driven IT undergraduate specializing in Artificial Intelligence. I focus on bridging the gap between complex data architectures, high-performance web solutions, and cross-platform mobile environments to build intelligent, end-to-end applications. With hands-on experience spanning predictive modeling, neural networks, robust Java/MERN backends, and React Native mobile ecosystems, I transform raw data into actionable, smart solutions.    
+    </p>
+
+    <div class="timeline-header">
+        <span class="header-badge">My Journey</span>
+        <h2>Projects & Experience</h2>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item left-item" data-aos="fade-right" data-aos-delay="100">
+    <div class="timeline-dot-glow"></div>
+    <div class="timeline-content-box" id="p1">
+        <span class="timeline-date">Feb 2026 – Present</span>
+        <h3 class="timeline-project-title">EduHub Mobile LMS</h3>
+        <p class="timeline-project-desc">
+            An interactive LMS for real-time lesson tracking, dynamic quizzes, and seamless student-teacher communication        
+        </p>
+        
+        
+    </div>
+</div>
+
+
+        <div class="timeline-item right-item" data-aos="fade-left" data-aos-delay="200">
+    <div class="timeline-dot-glow"></div>
+    <div class="timeline-content-box" id="p2">
+        <span class="timeline-date">Feb 2026 - Present</span>
+        <h3 class="timeline-project-title">Agriculture Community & Management System</h3>
+        <p class="timeline-project-desc">AI-powered agro-platform with a Gemini chatbot and TensorFlow crop disease classification model.</p>
+        
+    </div>
+</div>
+
+<div class="timeline-item left-item" data-aos="fade-right" data-aos-delay="300">
+    <div class="timeline-dot-glow"></div>
+    <div class="timeline-content-box" id="p3">
+        <span class="timeline-date">July 2025 – Sept 2025</span>
+        <h3 class="timeline-project-title">Dental Management System</h3>
+        <p class="timeline-project-desc">Enterprise web application for secure patient records, real-time scheduling, and automated clinic workflows.</p>
+        
+    </div>
+</div>
+
+<div  class="timeline-item right-item" data-aos="fade-left" data-aos-delay="400">
+    <div class="timeline-dot-glow"></div>
+    <div class="timeline-content-box" id="p4">
+        <span class="timeline-date">July 2025 – Sept 2025</span>
+        <h3 class="timeline-project-title">Loan Prediction System</h3>
+        <p class="timeline-project-desc">Predictive Machine Learning model trained to evaluate financial profiles and determine loan approval probabilities.</p>
+        
+    </div>
+</div>
+
+<div class="timeline-item left-item" data-aos="fade-right" data-aos-delay="500">
+    <div class="timeline-dot-glow"></div>
+    <div class="timeline-content-box" id="p5">
+        <span class="timeline-date">Feb 2025 – Apr 2025</span>
+        <h3 class="timeline-project-title">Online Bookstore Management System</h3>
+        <p class="timeline-project-desc">Core OOP web application leveraging custom data structures like Linked Lists for efficient CRUD operations.</p>
+        
+    </div>
+</div>
+
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const progressBars = document.querySelectorAll('.bar-fill');
+        if ('IntersectionObserver' in window) {
+            const barObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const bar = entry.target;
+                    const percentage = bar.getAttribute('data-progress');
+                    if (entry.isIntersecting) {
+                        bar.style.width = percentage; 
+                    } else {
+                        bar.style.width = '0%';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            progressBars.forEach(bar => barObserver.observe(bar));
+        } else {
+            progressBars.forEach(bar => {
+                bar.style.width = bar.getAttribute('data-progress');
+            });
+        }
+    });
+</script>
+<section id="skills" class="skills-section">
+    
+    <div class="section-heading" data-aos="fade-right" data-aos-duration="1200">
+        <span class="sub-title">Expertise</span>
+        <h2 class="main-title">Technical Arsenal.</h2>
+    </div>
+
+    <div class="arsenal-grid">
+        
+        <div class="arsenal-card card-purple" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-inner">
+                <div class="card-header-info">
+                    <span class="card-icon">🤖</span>
+                    <h3>AI / ML<br>Developer</h3>
+                </div>
+                <div class="card-skills-list">
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Python (Scikit-Learn, NumPy)</span><span>82%</span></div>
+                        <div class="bar-bg"><div class="bar-fill purple-fill" data-progress="82%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>NLP & Text Preprocessing</span><span>78%</span></div>
+                        <div class="bar-bg"><div class="bar-fill purple-fill" data-progress="78%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Model Training & Evaluation</span><span>80%</span></div>
+                        <div class="bar-bg"><div class="bar-fill purple-fill" data-progress="80%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arsenal-card card-blue" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-inner">
+                <div class="card-header-info">
+                    <span class="card-icon">🌐</span>
+                    <h3>MERN Stack<br>Developer</h3>
+                </div>
+                <div class="card-skills-list">
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>React.js (Context API)</span><span>82%</span></div>
+                        <div class="bar-bg"><div class="bar-fill blue-fill" data-progress="82%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Node.js / Express / Mongo</span><span>78%</span></div>
+                        <div class="bar-bg"><div class="bar-fill blue-fill" data-progress="78%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Tailwind CSS / UI Design</span><span>88%</span></div>
+                        <div class="bar-bg"><div class="bar-fill blue-fill" data-progress="88%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arsenal-card card-pink" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-inner">
+                <div class="card-header-info">
+                    <span class="card-icon">☕</span>
+                    <h3>Java Backend<br>Developer</h3>
+                </div>
+                <div class="card-skills-list">
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Java Spring Boot (REST)</span><span>85%</span></div>
+                        <div class="bar-bg"><div class="bar-fill pink-fill" data-progress="85%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>SQL Server / Databases</span><span>80%</span></div>
+                        <div class="bar-bg"><div class="bar-fill pink-fill" data-progress="80%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Maven / Gradle Tools</span><span>72%</span></div>
+                        <div class="bar-bg"><div class="bar-fill pink-fill" data-progress="72%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arsenal-card card-cyan" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-inner">
+                <div class="card-header-info">
+                    <span class="card-icon">📱</span>
+                    <h3>Mobile App<br>Developer</h3>
+                </div>
+                <div class="card-skills-list">
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>React Native Core</span><span>80%</span></div>
+                        <div class="bar-bg"><div class="bar-fill cyan-fill" data-progress="80%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Cross-Platform UI (iOS/Android)</span><span>75%</span></div>
+                        <div class="bar-bg"><div class="bar-fill cyan-fill" data-progress="75%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-info"><span>Git / GitHub Control</span><span>85%</span></div>
+                        <div class="bar-bg"><div class="bar-fill cyan-fill" data-progress="85%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="orbs-container" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+        <div class="tech-icons-header">
+                    <span class="tech-sub-glow">Core Stack</span>
+                    <h4 class="tech-main-title">Technologies & Tools</h4>
+                </div><br>
+        <div class="orbs-glass-panel">
+            
+            <div class="orbs-grid">
+                
+                <div class="orb-item item-html" data-tech="HTML5">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+                </div>
+
+                <div class="orb-item item-css" data-tech="CSS3">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
+                </div>
+
+                <div class="orb-item item-js" data-tech="JavaScript">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"></div>
+                </div>
+
+                <div class="orb-item item-ts" data-tech="TypeScript">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TS"></div>
+                </div>
+
+                <div class="orb-item item-react" data-tech="React">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></div>
+                </div>
+
+                <div class="orb-item item-python" data-tech="Python">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+                </div>
+
+                <div class="orb-item item-node" data-tech="Node.js">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node"></div>
+                </div>
+
+                <div class="orb-item item-mongo" data-tech="MongoDB">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="Mongo"></div>
+                </div>
+
+                <div class="orb-item item-java" data-tech="Java & Spring">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+                </div>
+
+                <div class="orb-item item-git" data-tech="Git / GitHub">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
+                </div>
+
+                <div class="orb-item item-sql" data-tech="SQL Server">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL"></div>
+                </div>
+
+                <div class="orb-item item-native" data-tech="React Native">
+                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="rotate-native" alt="Native"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section  id="projects" class="skills-section"> 
+
+    <div class="section-heading">
+        <span class="sub-title">My Creations</span>
+        <h2 class="main-title">Featured Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+        
+        <div class="project-card card-p1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <div class="project-badge">Web Application</div>
+            <h3 class="project-title">Web-Based Dental Management System</h3>
+            <p class="project-desc">
+                A comprehensive, secure clinic management ecosystem tailored for modern dental practices. Features distinct, secure dashboards for dentists, receptionists, and patients to streamline the entire clinical workflow seamlessly.
+            </p>
+            <div class="project-features">
+                <span><i class="fas fa-check"></i> Automated Appointment Scheduling</span>
+                <span><i class="fas fa-check"></i> Role-Based Authentication & Security</span>
+                <span><i class="fas fa-check"></i> Live Patient & Dentist Record Tracking</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag">Java</span>
+                <span class="tech-tag">SQL Server</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">CSS3</span>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/Vishwa633/dental-management-system" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
+                <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+        </div>
+
+        <div class="project-card card-p2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <div class="project-badge">AI & Machine Learning</div>
+            <h3 class="project-title">Agro-Community & Management Platform</h3>
+            <p class="project-desc">
+                An intelligent, data-driven agricultural platform designed to empower farmers and community management. Integrated with smart models to handle crop optimization and streamline real-time agricultural communication.
+            </p>
+            <div class="project-features">
+                <span><i class="fas fa-check"></i> Gemini-Powered AI Chatbot Support</span>
+                <span><i class="fas fa-check"></i> TensorFlow Crop Disease Classification</span>
+                <span><i class="fas fa-check"></i> Real-time Farmer Community Hub</span>
+            </div>
+            <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Gemini API</span>
+                <span class="tech-tag">React</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
+                <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+        </div>
+
+        <div class="project-card card-p3" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+    <div class="project-badge">Data Science</div>
+    <h3 class="project-title">Loan Eligibility Prediction</h3>
+    <p class="project-desc">
+        A machine learning model designed to predict loan approval outcomes by analyzing complex user financial data with high precision.
+    </p>
+    <div class="project-features">
+        <span><i class="fas fa-check"></i> ML-Powered Financial Analysis</span>
+        <span><i class="fas fa-check"></i> Predictive Data Modeling</span>
+        <span><i class="fas fa-check"></i> Decision Support Integration</span>
+    </div>
+    <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">TensorFlow</span>
+        <span class="tech-tag">Scikit-Learn</span>
+        <span class="tech-tag">Pandas</span>
+    </div>
+    <div class="project-links">
+        <a href="https://github.com/Vishwa633/AIML-Loan_Prediction-" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i>Source Code</a>
+        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> View Model</a>
+    </div>
+    </div>
+
+    <div class="project-card card-p4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+    <div class="project-badge">Web Application</div>
+    <h3 class="project-title">Online Bookstore Management</h3>
+    <p class="project-desc">
+        A robust web-based bookstore application leveraging Java Spring Boot and OOP principles for efficient book, user, and transaction management.
+    </p>
+    <div class="project-features">
+        <span><i class="fas fa-check"></i> CRUD Operations & Data Handling</span>
+        <span><i class="fas fa-check"></i> Custom Linked List Data Structures</span>
+        <span><i class="fas fa-check"></i> Seamless Transaction Workflow</span>
+    </div>
+    <div class="project-tech">
+        <span class="tech-tag">Java (Spring Boot)</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">CSS3</span>
+        <span class="tech-tag">SQL</span>
+    </div>
+    <div class="project-links">
+        <a href="https://github.com/Vishwa633/_Online_Bookstore_Management_System_" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
+        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+    </div>
+    </div>
+
+        <div class="project-card card-p5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+    <div class="project-badge">Mobile Application</div>
+    <h3 class="project-title">EduHub Mobile LMS</h3>
+    <p class="project-desc">
+        An interactive Learning Management System (LMS) app featuring real-time lesson tracking, dynamic quizzes, and a communication hub.
+    </p>
+    <div class="project-features">
+        <span><i class="fas fa-check"></i> Real-time Progress Tracking</span>
+        <span><i class="fas fa-check"></i> Interactive Quiz Engine</span>
+        <span><i class="fas fa-check"></i> Student-Teacher Communication</span>
+    </div>
+    <div class="project-tech">
+        <span class="tech-tag">React Native</span>
+        <span class="tech-tag">Firebase</span>
+        <span class="tech-tag">Node.js</span>
+    </div>
+    <div class="project-links">
+        <a href="https://github.com/Vishwa633/EduHub" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
+        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> APK</a>
+    </div>
+    </div>
+
+    </div>
+</section>
+
+    
+</body>
+</html>
