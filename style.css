@@ -49,6 +49,20 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5rem;
+    
+    /* Fixed කර තැබීමට */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    
+    /* Background එක ලස්සනට තියන්න */
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(10px);
+    
+    /* Padding එක width එකට බලපාන්න නොදෙන්න */
+    box-sizing: border-box;
 }
 
 .logo-icon {
@@ -68,10 +82,12 @@ nav{
     display: flex;
     align-items: center;
     gap: 3rem;
-    margin-left: -5%;
+    margin-left: 0%;
+    
 }
 
 nav a{
+    position: relative;
     font-size: 1rem;
     letter-spacing: 0.1rem;
     transition: color 0.2s;
@@ -82,6 +98,26 @@ nav a{
 
 nav a:hover{
     color: #a7a7a7;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* අකුරට යටින් තියෙන්න */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #9d4edd; /* තිතේ පාට */
+    border-radius: 50%;
+    opacity: 0; /* මුලින් පේන්නේ නැහැ */
+    transition: 0.3s;
+}
+
+/* Active හෝ Hover වුනාම තිත පේන්න */
+nav a.active::after,
+nav a:hover::after {
+    opacity: 1;
 }
 
 .btn-signing{
@@ -99,6 +135,10 @@ nav a:hover{
 
 .btn-signing:hover{
     background-color: white;
+}
+
+body{
+    padding-top: 80px;
 }
 
 /* MAIN CONTENT */
@@ -1645,4 +1685,24 @@ a {
 
 .pdf{
     color: white;
+}
+
+.footer-text {
+    text-align: center;
+    font-size: 1rem;
+    color: #a2a8b4;
+    margin-bottom: 0.5rem;
+}
+
+.footer-text span {
+    color: #9d4edd;
+    font-weight: 600;
+}
+
+.footer-subtext {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }

@@ -25,28 +25,30 @@
     <div class="container">
         <header>
             
-            <div data-aos="fade-down" data-aos-duration="1500" class="logo-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="url(#ai-gradient)" stroke="#9d4edd" stroke-width="1.5"/>
-                    <defs>
-                        <linearGradient id="ai-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="100%" stop-color="#7f42a7"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span>VISHWA</span>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div data-aos="fade-down" data-aos-duration="1500" class="logo-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="url(#ai-gradient)" stroke="#9d4edd" stroke-width="1.5"/>
+                        <defs>
+                            <linearGradient id="ai-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="100%" stop-color="#7f42a7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>VISHWA</span>
+                </div>
+            </a>
 
             <nav>
                 <a data-aos="fade-down" data-aos-duration="1500" href="#about">ABOUT</a>
-                <a data-aos="fade-down" data-aos-duration="2000" href="#projects">PROJECTS</a>
-                <a data-aos="fade-down" data-aos-duration="2500" href="#skills">SKILLS</a>
+                <a data-aos="fade-down" data-aos-duration="2000" href="#skills">SKILLS</a>
+                <a data-aos="fade-down" data-aos-duration="2500" href="#projects">PROJECTS</a>
                 <a data-aos="fade-down" data-aos-duration="3000" href="#contact">CONTACT</a>
             </nav>
 
             
-                <a href="assets/Vishwa Nethsara.pdf" data-aos="fade-down" data-aos-duration="1500" class="btn-signing">RESUME</a>
+                <a href="assets/Vishwa Nethsara.pdf" data-aos="fade-down" data-aos-duration="1500" target="_blank" class="btn-signing">RESUME</a>
             
         </header>
 
@@ -490,7 +492,7 @@
             </div>
             <div class="project-links">
                 <a href="https://github.com/Vishwa633/dental-management-system" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
-                <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             </div>
         </div>
 
@@ -513,7 +515,7 @@
             </div>
             <div class="project-links">
                 <a href="#" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
-                <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             </div>
         </div>
 
@@ -536,7 +538,7 @@
     </div>
     <div class="project-links">
         <a href="https://github.com/Vishwa633/AIML-Loan_Prediction-" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i>Source Code</a>
-        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> View Model</a>
+        <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> View Model</a>
     </div>
     </div>
 
@@ -559,7 +561,7 @@
     </div>
     <div class="project-links">
         <a href="https://github.com/Vishwa633/_Online_Bookstore_Management_System_" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
-        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+        <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
     </div>
     </div>
 
@@ -581,7 +583,7 @@
     </div>
     <div class="project-links">
         <a href="https://github.com/Vishwa633/EduHub" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
-        <a href="loader.html" target="_blank" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> APK</a>
+        <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> APK</a>
     </div>
     </div>
 
@@ -632,10 +634,32 @@
             <a href="https://www.instagram.com/vishw.a633" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/vishwa-nethsara-00a0a3372/" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/Vishwa633" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
+        </div><br>
+
+        <p class="footer-text">Designed & built by <span>Vishwa Nethsara</span></p>
+        <p class="footer-subtext">BSc IT (AI) Undergraduate • SLIIT • Sri Lanka</p>
     </div>
 </section>
 
-    
+    <script>
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav a");
+
+        window.onscroll = () => {
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute("id");
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(links => {
+                        links.classList.remove("active");
+                        document.querySelector('nav a[href*=' + id + ']').classList.add("active");
+                    });
+                }
+            });
+        };
+    </script>
 </body>
 </html>
