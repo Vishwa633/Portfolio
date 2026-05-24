@@ -1,0 +1,92 @@
+﻿.myBlogs {
+    padding: 60px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    font-family: var(--font-body);
+}
+
+.myBlogsHeader {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.myBlogsHeader h1 {
+    font-size: 42px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+[data-theme='light'] .myBlogsHeader h1,
+:root:not([data-theme]) .myBlogsHeader h1 {
+    color: #0f172a;
+}
+
+.myBlogsHeader p {
+    color: #94a3b8;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+[data-theme='light'] .myBlogsHeader p,
+:root:not([data-theme]) .myBlogsHeader p {
+    color: #475569;
+}
+
+.myBlogsEmpty {
+    text-align: center;
+    padding: 80px 40px;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .myBlogsEmpty {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.myBlogsEmpty p {
+    font-size: 20px;
+    color: #64748b;
+    margin-bottom: 30px;
+    font-family: var(--font-display);
+}
+
+.myBlogsWriteBtn {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: var(--emerald-600);
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+.myBlogsWriteBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(5, 150, 105, 0.4);
+}
+
+/* Post Grid matches the Home page logic perfectly */
+.myBlogsPosts {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+/* Responsive adjustments for overall padding */
+@media screen and (max-width: 768px) {
+    .myBlogs {
+        padding: 40px 20px;
+    }
+}
