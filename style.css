@@ -1488,8 +1488,8 @@ main{
 /* Glassmorphism Contact Form Card */
 .contact-card {
     flex: 1;
-    min-width: 320px;
-    max-width: 480px;
+    min-width: 260px;
+    max-width: 520px;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -1553,9 +1553,9 @@ input:focus, textarea:focus {
 /* Spline Container - Background removed to match theme */
 .contact-3d {
     flex: 1; 
-    min-width: 500px; 
-    max-width: 600px; 
-    min-height: 500px;
+    min-width: 360px; 
+    max-width: 720px; 
+    min-height: 420px;
     border-radius: 24px;
     overflow: hidden; 
     position: relative;
@@ -1579,10 +1579,44 @@ input:focus, textarea:focus {
     .contact-wrapper {
         flex-direction: column;
         align-items: center;
+        gap: 1.2rem;
     }
-    .contact-card, .contact-3d {
+    .contact-card {
+        width: 100%;
+        max-width: 680px;
+        min-width: auto;
+        padding: 1.5rem;
+    }
+    .contact-3d {
+        width: 100%;
+        min-width: auto;
+        min-height: 320px;
+        max-width: 100%;
+        margin-left: 0;
+        transform: scale(1);
+        transform-origin: center;
+    }
+    .contact-3d iframe {
+        height: 320px;
+        transform: none;
+    }
+    .send-btn {
         width: 100%;
     }
+    input, textarea { font-size: 0.95rem; }
+}
+
+@media (max-width: 450px) {
+    .contact-card { padding: 1rem; border-radius: 16px; }
+    .contact-subtext { font-size: 0.95rem; max-width: 100%; }
+    .contact-3d { min-height: 220px; }
+    .contact-3d iframe { height: 220px; }
+}
+
+/* Hide Spline 3D on small/mobile screens to improve layout and performance */
+@media (max-width: 650px) {
+    .contact-3d { display: none !important; }
+    .contact-card { width: 100%; max-width: 900px; margin: 0 auto; }
 }
 
 .contact-3d::after {
@@ -1630,7 +1664,11 @@ input:focus, textarea:focus {
 
 .info-card i { font-size: 1.5rem; color: #9d4edd; margin-bottom: 10px; display: block; }
 .info-card span { font-size: 0.7rem; letter-spacing: 2px; color: #a2a8b4; }
-.info-card p { margin-top: 5px; font-weight: 600; }
+.info-card p { margin-top: 5px; font-weight: 600; overflow-wrap: anywhere; word-break: break-word; white-space: normal; }
+
+@media (max-width: 650px) {
+    .info-card p { font-size: 0.95rem; }
+}
 
 /* Social Links Style */
 .social-links {
@@ -1705,4 +1743,80 @@ a {
     color: #555;
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+/* Mobile Menu Button (hamburger) */
+.mobile-menu-btn{
+    display: none;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 32px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+.mobile-menu-btn span{
+    display: block;
+    height: 3px;
+    background: #e7e7e7;
+    border-radius: 3px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+.mobile-menu-btn.active span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.mobile-menu-btn.active span:nth-child(2){ opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+/* Mobile sidebar nav */
+#mobileNav.mobile-nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    background: rgba(6,6,10,0.98);
+    backdrop-filter: blur(8px);
+    transform: translateX(-110%);
+    transition: transform 0.35s ease;
+    z-index: 2000;
+    padding: 5rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+#mobileNav.mobile-nav.active{ transform: translateX(0); }
+
+.mobile-nav-link{
+    color: #e7e7e7;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.8rem 0.6rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.mobile-nav-link:hover{ background: rgba(255,255,255,0.03); }
+
+.mobile-nav-link.btn-signing{
+    background: linear-gradient(135deg, #9d4edd, #7f42a7);
+    color: #fff;
+    text-align: center;
+    padding: 0.9rem 0.6rem;
+    margin-top: 0.6rem;
+    border-radius: 12px;
+}
+
+/* Show hamburger and hide desktop nav on small screens */
+@media (max-width: 768px){
+    .mobile-menu-btn{ display: flex; }
+    nav{ display: none; }
+    /* hide header resume button to avoid duplicate when sidebar is used */
+    .btn-signing{ display: none !important; }
+}
+
+/* Ensure header elements align when hamburger visible */
+@media (max-width: 480px){
+    header{ padding: 0.8rem 0.8rem; }
+    .logo-icon span{ font-size: 1.1rem; }
 }

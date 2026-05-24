@@ -47,10 +47,27 @@
                 <a data-aos="fade-down" data-aos-duration="3000" href="#contact">CONTACT</a>
             </nav>
 
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Mobile Sidebar Nav (used on small screens) -->
+            <nav id="mobileNav" class="mobile-nav" aria-hidden="true">
+                <a href="#about" class="mobile-nav-link">ABOUT</a>
+                <a href="#skills" class="mobile-nav-link">SKILLS</a>
+                <a href="#projects" class="mobile-nav-link">PROJECTS</a>
+                <a href="#contact" class="mobile-nav-link">CONTACT</a>
+                <a href="assets/Vishwa Nethsara.pdf" target="_blank" class="mobile-nav-link btn-signing">RESUME</a>
+            </nav>
             
                 <a href="assets/Vishwa Nethsara.pdf" data-aos="fade-down" data-aos-duration="1500" target="_blank" class="btn-signing">RESUME</a>
             
         </header>
+
+        
 
         <main>
             <div class="content">
@@ -106,6 +123,33 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        // Toggle menu on button click
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header') && mobileNav.classList.contains('active')) {
+                mobileMenuBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+            }
+        });
+
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             
@@ -514,7 +558,7 @@
                 <span class="tech-tag">React</span>
             </div>
             <div class="project-links">
-                <a href="#" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
+                <a href="https://github.com/Vishwa633/Agrolink" target="_blank" class="proj-link github-link"><i class="fab fa-github"></i> Source Code</a>
                 <a href="loader.html" class="proj-link demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
             </div>
         </div>
