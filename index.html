@@ -643,21 +643,49 @@
 
     <div class="contact-wrapper">
         
-        <form action="https://formspree.io/f/mdavjakg" method="POST" class="contact-card" data-aos="fade-right" data-aos-duration="1000">
-            <div class="input-group">
-                <label>Your Name</label>
-                <input type="text" placeholder="What's your name?">
-            </div>
-            <div class="input-group">
-                <label>Your Email</label>
-                <input type="email" name="email" placeholder="What's your email?">
-            </div>
-            <div class="input-group">
-                <label>Your Message</label>
-                <textarea name="message" rows="4" placeholder="What do you want to say?"></textarea>
-            </div>
-            <button type="submit" class="send-btn">Send Message</button>
-        </form>
+        <form id="my-form" action="https://formspree.io/f/mdavjakg" method="POST" class="contact-card" data-aos="fade-right" data-aos-duration="1000">
+    <div class="input-group">
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="What's your name?" required>
+    </div>
+    <div class="input-group">
+        <label>Your Email</label>
+        <input type="email" name="email" placeholder="What's your email?" required>
+    </div>
+    <div class="input-group">
+        <label>Your Message</label>
+        <textarea name="message" rows="4" placeholder="What do you want to say?" required></textarea>
+    </div>
+    <button type="submit" class="send-btn" id="my-form-button">Send Message</button>
+    
+    <p id="my-form-status" style="margin-top: 10px;"></p>
+</form>
+
+<script>
+  var form = document.getElementById("my-form");
+  var status = document.getElementById("my-form-status");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    status.innerHTML = "Sending...";
+    var data = new FormData(event.target);
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        status.innerHTML = "Message Sent Successfully!";
+        form.reset();
+      } else {
+        status.innerHTML = "Oops! There was a problem.";
+      }
+    }).catch(error => {
+      status.innerHTML = "Oops! There was a problem.";
+    });
+  }
+  form.addEventListener("submit", handleSubmit);
+</script>
 
         <div class="contact-3d" data-aos="fade-left" data-aos-duration="1000">
             <iframe src='https://my.spline.design/worldplanet-Dadhm7jDH1u6DcKdM1haKDmd/' frameborder='0' width='100%' height='100%'></iframe>        </div>
