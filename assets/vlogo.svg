@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="256" height="256" role="img" aria-label="Vishwa logo">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="50%" stop-color="#9d4edd"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffd6ff" stop-opacity="0.25"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- outer ring -->
+  <circle cx="60" cy="60" r="52" fill="none" stroke="url(#grad1)" stroke-width="6" filter="url(#glow)"/>
+
+  <!-- filled subtle background -->
+  <circle cx="60" cy="60" r="44" fill="#07020a" opacity="0.7"/>
+
+  <!-- stylized V -->
+  <path d="M36 36 L60 80 L84 36" fill="none" stroke="url(#grad1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- inner highlight -->
+  <path d="M45 40 L60 70 L75 40" fill="none" stroke="url(#grad2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+  <!-- lightning accent -->
+  <path d="M58 46 L62 52 L57 53 L66 68" fill="none" stroke="#d3a5ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+</svg>
