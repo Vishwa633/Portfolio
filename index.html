@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="assets/vlogo.svg" type="image/svg+xml">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -27,15 +29,7 @@
             
             <a href="index.html" class="logo-link">
                 <div data-aos="fade-down" data-aos-duration="1500" class="logo-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="url(#ai-gradient)" stroke="#9d4edd" stroke-width="1.5"/>
-                        <defs>
-                            <linearGradient id="ai-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stop-color="#ffffff"/>
-                                <stop offset="100%" stop-color="#7f42a7"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
+                    <img src="assets/vlogo.svg" alt="Vishwa logo" class="logo-img" width="40" height="40">
                     <span>VISHWA</span>
                 </div>
             </a>
@@ -662,29 +656,72 @@
 </form>
 
 <script>
-  var form = document.getElementById("my-form");
-  var status = document.getElementById("my-form-status");
+    // Clean SweetAlert2-based submit flow with graceful fallback text
+    const form = document.getElementById("my-form");
+    const status = document.getElementById("my-form-status");
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    status.innerHTML = "Sending...";
-    var data = new FormData(event.target);
-    fetch(event.target.action, {
-      method: form.method,
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if (response.ok) {
-        status.innerHTML = "Message Sent Successfully!";
-        form.reset();
-      } else {
-        status.innerHTML = "Oops! There was a problem.";
-      }
-    }).catch(error => {
-      status.innerHTML = "Oops! There was a problem.";
-    });
-  }
-  form.addEventListener("submit", handleSubmit);
+    if (form) {
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Show loading modal
+            Swal.fire({
+                title: 'Sending...',
+                text: 'Please wait while we send your message.',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading(),
+                showConfirmButton: false
+            });
+
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                Swal.close();
+
+                if (res.ok) {
+                    // Show clean success modal
+                    Swal.fire({
+                        title: 'Thanks!',
+                        text: 'Your message has been sent successfully. I will get back to you soon!',
+                        icon: 'success',
+                        confirmButtonColor: '#7f42a7',
+                        confirmButtonText: 'OK'
+                    });
+
+                    if (status) {
+                        status.textContent = 'Message sent successfully.';
+                    }
+                    form.reset();
+                } else {
+                    const errorText = await res.text();
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: 'There was a problem sending your message. Please try again.',
+                        icon: 'error',
+                        confirmButtonColor: '#7f42a7'
+                    });
+                    if (status) status.textContent = 'Submission failed.';
+                    console.error('Formspree response error:', res.status, errorText);
+                }
+            } catch (err) {
+                Swal.close();
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to send message. Check your connection and try again.',
+                    icon: 'error',
+                    confirmButtonColor: '#7f42a7'
+                });
+                if (status) status.textContent = 'Network error.';
+                console.error('Form submit error:', err);
+            }
+        });
+    }
 </script>
 
         <div class="contact-3d" data-aos="fade-left" data-aos-duration="1000">
