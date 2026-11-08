@@ -1129,6 +1129,45 @@ main{
     box-shadow: 0 0 25px rgba(157, 78, 221, 0.4), 0 15px 40px rgba(157, 78, 221, 0.2) !important;
 }
 
+/* Featured cards share the same blue/orange palette as their timeline entries. */
+#project-churn { --project-accent: 96, 165, 250; --project-accent-dark: #1d4ed8; }
+#project-solar { --project-accent: 251, 146, 60; --project-accent-dark: #c2410c; }
+
+#project-churn,
+#project-solar {
+    border-color: rgba(var(--project-accent), 0.4);
+    box-shadow: 0 0 10px rgba(var(--project-accent), 0.1);
+}
+#project-churn:hover,
+#project-solar:hover {
+    border-color: rgb(var(--project-accent));
+    box-shadow: 0 0 15px rgba(var(--project-accent), 0.4);
+}
+#project-churn .project-badge,
+#project-solar .project-badge,
+#project-churn .tech-tag,
+#project-solar .tech-tag {
+    color: rgb(var(--project-accent));
+    border-color: rgba(var(--project-accent), 0.3);
+    background: rgba(var(--project-accent), 0.05);
+}
+#project-churn .project-features i,
+#project-solar .project-features i {
+    color: rgb(var(--project-accent));
+}
+#project-churn .tech-tag:hover,
+#project-solar .tech-tag:hover {
+    border-color: rgb(var(--project-accent));
+    box-shadow: 0 0 10px rgba(var(--project-accent), 0.5);
+    background: rgba(var(--project-accent), 0.1);
+}
+#project-churn .demo-link,
+#project-solar .demo-link {
+    background: linear-gradient(135deg, var(--project-accent-dark), var(--project-accent-dark));
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(var(--project-accent), 0.3);
+}
+
 /* Distinct accents for the latest timeline projects. */
 .timeline-item:has(#timeline-churn) { --timeline-accent: 96, 165, 250; }
 .timeline-item:has(#timeline-solar) { --timeline-accent: 251, 146, 60; }
