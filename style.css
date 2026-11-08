@@ -1129,6 +1129,34 @@ main{
     box-shadow: 0 0 25px rgba(157, 78, 221, 0.4), 0 15px 40px rgba(157, 78, 221, 0.2) !important;
 }
 
+/* Distinct accents for the latest timeline projects. */
+.timeline-item:has(#timeline-churn) { --timeline-accent: 96, 165, 250; }
+.timeline-item:has(#timeline-solar) { --timeline-accent: 251, 146, 60; }
+
+#timeline-churn,
+#timeline-solar {
+    border-color: rgba(var(--timeline-accent), 0.45);
+    background: linear-gradient(135deg, rgba(var(--timeline-accent), 0.08), rgba(255, 255, 255, 0.015));
+}
+
+#timeline-churn .timeline-date,
+#timeline-solar .timeline-date {
+    color: rgb(var(--timeline-accent));
+}
+
+.timeline-item:has(#timeline-churn) .timeline-dot-glow,
+.timeline-item:has(#timeline-solar) .timeline-dot-glow {
+    background: rgb(var(--timeline-accent)) !important;
+    box-shadow: 0 0 15px rgba(var(--timeline-accent), 0.8) !important;
+}
+
+#timeline-churn:hover,
+#timeline-solar:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--timeline-accent));
+    box-shadow: 0 0 25px rgba(var(--timeline-accent), 0.3), 0 15px 40px rgba(var(--timeline-accent), 0.15);
+}
+
 /* 🌌 MINIMALIST TIMELINE HEADER STYLES */
 .timeline-header {
     text-align: center;
