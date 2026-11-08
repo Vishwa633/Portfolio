@@ -4,24 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vishwa Nethsara | AI Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=20261108-project-colors">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20261108-mobile-performance">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
     <link rel="icon" href="assets/vlogo.svg" type="image/svg+xml">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="app.js?v=20261108-mobile-performance" defer></script>
 </head>
 <body>
 
     <canvas id="snowCanvas"></canvas>
 
-    <div id="preloader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <div class="loading-text">INITIALIZING AI SYSTEM...</div>
-        </div>
-    </div>
 
-    <img class="image-gradient" src="assets/gradient.png" alt="gradient">
+
+    <img class="image-gradient" src="assets/gradient.png" alt="" decoding="async" width="524" height="520">
     <div class="layer-blur"></div>
 
     <div class="container">
@@ -42,14 +36,14 @@
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-controls="mobileNav" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             
             <!-- Mobile Sidebar Nav (used on small screens) -->
-            <nav id="mobileNav" class="mobile-nav" aria-hidden="true">
+            <nav id="mobileNav" class="mobile-nav" aria-hidden="true" inert>
                 <a href="#about" class="mobile-nav-link">ABOUT</a>
                 <a href="#skills" class="mobile-nav-link">SKILLS</a>
                 <a href="#projects" class="mobile-nav-link">PROJECTS</a>
@@ -105,137 +99,13 @@
             </div>
         </main>
 
-        <spline-viewer data-aos="fade-zoom-in"
-                data-aos-easing="ease-in-back"
-                data-aos-delay="300"
-                data-aos-offset="0" data-aos-duration="3000" class="robot-3d" url="https://prod.spline.design/XxTRTImXhj-7cSPR/scene.splinecode"></spline-viewer>
+        <div class="robot-3d" id="robotStage">
+            <button class="robot-launch" id="robotLaunch" type="button">
+                <img src="assets/vlogo.svg" alt="" width="64" height="64">
+                <span>Meet the interactive robot <span aria-hidden="true">↗</span></span>
+            </button>
+        </div>
     </div>
-
-    
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.94/build/spline-viewer.js"></script>
-
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileNav = document.getElementById('mobileNav');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-        // Toggle menu on button click
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-        });
-
-        // Close menu when a link is clicked
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                mobileNav.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('header') && mobileNav.classList.contains('active')) {
-                mobileMenuBtn.classList.remove('active');
-                mobileNav.classList.remove('active');
-            }
-        });
-
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            
-            setTimeout(() => {
-                preloader.classList.add('preloader-hidden');
-                
-                setTimeout(() => {
-                    AOS.init();
-                    
-                    initSnow(); 
-                }, 500);
-                
-            }, 1000);
-        });
-
-        // --- 3D SNOW EFFECT LOGIC ---
-        function initSnow() {
-            const canvas = document.getElementById('snowCanvas');
-            const ctx = canvas.getContext('2d');
-
-            
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            const numFlakes = 70; 
-            const flakes = [];
-
-            for (let i = 0; i < numFlakes; i++) {
-                flakes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 3.5 + 0.5, 
-                    d: Math.random() * numFlakes, 
-                    speed: Math.random() * 1 + 0.5 
-                });
-            }
-
-            
-            function drawFlakes() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; 
-                ctx.beginPath();
-
-                for (let i = 0; i < numFlakes; i++) {
-                    const f = flakes[i];
-                    ctx.moveTo(f.x, f.y);
-                    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-                }
-                ctx.fill();
-                moveFlakes();
-            }
-
-            
-            function moveFlakes() {
-                for (let i = 0; i < numFlakes; i++) {
-                    const f = flakes[i];
-                    
-                    f.y += f.speed; 
-                    f.x += Math.sin(f.d) * 0.5; 
-
-                    
-                    if (f.y > canvas.height) {
-                        flakes[i] = {
-                            x: Math.random() * canvas.width,
-                            y: -10,
-                            r: f.r,
-                            d: f.d,
-                            speed: f.speed
-                        };
-                    }
-                    
-                    
-                    if (f.x > canvas.width + 5 || f.x < -5) {
-                        flakes[i].x = Math.random() * canvas.width;
-                    }
-
-                    f.d += 0.01; 
-                }
-            }
-
-           
-            function animate() {
-                drawFlakes();
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-    </script>
 
     <section id="about" class="about-section">
     
@@ -330,30 +200,6 @@
 
     </div>
 </section>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const progressBars = document.querySelectorAll('.bar-fill');
-        if ('IntersectionObserver' in window) {
-            const barObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const bar = entry.target;
-                    const percentage = bar.getAttribute('data-progress');
-                    if (entry.isIntersecting) {
-                        bar.style.width = percentage; 
-                    } else {
-                        bar.style.width = '0%';
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-            progressBars.forEach(bar => barObserver.observe(bar));
-        } else {
-            progressBars.forEach(bar => {
-                bar.style.width = bar.getAttribute('data-progress');
-            });
-        }
-    });
-</script>
 <section id="skills" class="skills-section">
     
     <div class="section-heading" data-aos="fade-right" data-aos-duration="1200">
@@ -467,51 +313,51 @@
             <div class="orbs-grid">
                 
                 <div class="orb-item item-html" data-tech="HTML5">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
                 </div>
 
                 <div class="orb-item item-css" data-tech="CSS3">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
                 </div>
 
                 <div class="orb-item item-js" data-tech="JavaScript">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"></div>
                 </div>
 
                 <div class="orb-item item-ts" data-tech="TypeScript">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TS"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TS"></div>
                 </div>
 
                 <div class="orb-item item-react" data-tech="React">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></div>
                 </div>
 
                 <div class="orb-item item-python" data-tech="Python">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
                 </div>
 
                 <div class="orb-item item-node" data-tech="Node.js">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node"></div>
                 </div>
 
                 <div class="orb-item item-mongo" data-tech="MongoDB">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="Mongo"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="Mongo"></div>
                 </div>
 
                 <div class="orb-item item-java" data-tech="Java & Spring">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
                 </div>
 
                 <div class="orb-item item-git" data-tech="Git / GitHub">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
                 </div>
 
                 <div class="orb-item item-sql" data-tech="SQL Server">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL"></div>
                 </div>
 
                 <div class="orb-item item-native" data-tech="React Native">
-                    <div class="orb-3d-crystal"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="rotate-native" alt="Native"></div>
+                    <div class="orb-3d-crystal"><img loading="lazy" decoding="async" width="64" height="64" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="rotate-native" alt="Native"></div>
                 </div>
 
             </div>
@@ -688,80 +534,11 @@
     </div>
     <button type="submit" class="send-btn" id="my-form-button">Send Message</button>
     
-    <p id="my-form-status" style="margin-top: 10px;"></p>
+    <p id="my-form-status" role="status" aria-live="polite" style="margin-top: 10px;"></p>
 </form>
 
-<script>
-    // Clean SweetAlert2-based submit flow with graceful fallback text
-    const form = document.getElementById("my-form");
-    const status = document.getElementById("my-form-status");
-
-    if (form) {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            // Show loading modal
-            Swal.fire({
-                title: 'Sending...',
-                text: 'Please wait while we send your message.',
-                allowOutsideClick: false,
-                didOpen: () => Swal.showLoading(),
-                showConfirmButton: false
-            });
-
-            const formData = new FormData(form);
-
-            try {
-                const res = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                Swal.close();
-
-                if (res.ok) {
-                    // Show clean success modal
-                    Swal.fire({
-                        title: 'Thanks!',
-                        text: 'Your message has been sent successfully. I will get back to you soon!',
-                        icon: 'success',
-                        confirmButtonColor: '#7f42a7',
-                        confirmButtonText: 'OK'
-                    });
-
-                    if (status) {
-                        status.textContent = 'Message sent successfully.';
-                    }
-                    form.reset();
-                } else {
-                    const errorText = await res.text();
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: 'There was a problem sending your message. Please try again.',
-                        icon: 'error',
-                        confirmButtonColor: '#7f42a7'
-                    });
-                    if (status) status.textContent = 'Submission failed.';
-                    console.error('Formspree response error:', res.status, errorText);
-                }
-            } catch (err) {
-                Swal.close();
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Failed to send message. Check your connection and try again.',
-                    icon: 'error',
-                    confirmButtonColor: '#7f42a7'
-                });
-                if (status) status.textContent = 'Network error.';
-                console.error('Form submit error:', err);
-            }
-        });
-    }
-</script>
-
         <div class="contact-3d" data-aos="fade-left" data-aos-duration="1000">
-            <iframe src='https://my.spline.design/worldplanet-Dadhm7jDH1u6DcKdM1haKDmd/' frameborder='0' width='100%' height='100%'></iframe>        </div>
+            <iframe data-src='https://my.spline.design/worldplanet-Dadhm7jDH1u6DcKdM1haKDmd/' title='Interactive planet' loading='lazy' width='100%' height='100%'></iframe>        </div>
         </div>
 </section>
 
@@ -785,26 +562,5 @@
         <p class="footer-subtext">BSc IT (AI) Undergraduate • SLIIT • Sri Lanka</p>
     </div>
 </section>
-
-    <script>
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll("nav a");
-
-        window.onscroll = () => {
-            sections.forEach(sec => {
-                let top = window.scrollY;
-                let offset = sec.offsetTop - 150;
-                let height = sec.offsetHeight;
-                let id = sec.getAttribute("id");
-
-                if (top >= offset && top < offset + height) {
-                    navLinks.forEach(links => {
-                        links.classList.remove("active");
-                        document.querySelector('nav a[href*=' + id + ']').classList.add("active");
-                    });
-                }
-            });
-        };
-    </script>
 </body>
 </html>
