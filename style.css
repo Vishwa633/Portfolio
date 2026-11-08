@@ -949,14 +949,16 @@ main{
     
     
     background: linear-gradient(
-        180deg, 
-        rgba(255, 255, 255, 0.02) 0%,    
-        #ff4d6d 15%,                    
-        #06d6a0 35%,                   
-        #ffd166 55%,                  
-        #00b4d8 75%,               
-        #9d4edd 90%,                   
-        rgba(255, 255, 255, 0.02) 100%   
+        180deg,
+        rgba(96, 165, 250, 0.02) 0%,
+        #60a5fa 5%,
+        #fb923c 19%,
+        #ff4d6d 33%,
+        #06d6a0 47%,
+        #ffd166 61%,
+        #00b4d8 75%,
+        #9d4edd 89%,
+        rgba(157, 78, 221, 0.02) 100%
     );
     
     /* ⚡ Cyberpunk Cyber-Glow Effect */

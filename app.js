@@ -158,3 +158,26 @@ form.addEventListener('submit', async event => {
         submitButton.disabled = false;
     }
 });
+
+// Align each gradient stop to the actual node, including variable-height cards.
+// Offset measurements ignore reveal transforms; only layout changes trigger this.
+const timeline = document.querySelector('.timeline-container');
+const timelineLine = timeline?.querySelector('.timeline-line');
+if (timelineLine) {
+    const updateTimelineColors = () => {
+        const stops = [...timeline.querySelectorAll('.timeline-item')].map(item => {
+            const dot = item.querySelector('.timeline-dot-glow');
+            const position = item.offsetTop + dot.offsetTop + dot.offsetHeight / 2;
+            return `${getComputedStyle(dot).backgroundColor} ${position}px`;
+        });
+        timelineLine.style.background = `linear-gradient(to bottom, transparent 0px, ${stops.join(', ')}, transparent 100%)`;
+    };
+    updateTimelineColors();
+    if ('ResizeObserver' in window) {
+        const timelineObserver = new ResizeObserver(updateTimelineColors);
+        timelineObserver.observe(timeline);
+        timeline.querySelectorAll('.timeline-item').forEach(item => timelineObserver.observe(item));
+    } else {
+        window.addEventListener('resize', updateTimelineColors, { passive: true });
+    }
+}
