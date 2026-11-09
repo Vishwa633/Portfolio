@@ -1133,38 +1133,38 @@ main{
 
 /* Featured cards share the same blue/orange palette as their timeline entries. */
 #project-churn { --project-accent: 96, 165, 250; --project-accent-dark: #1d4ed8; }
-#project-solar { --project-accent: 251, 146, 60; --project-accent-dark: #c2410c; }
+:is(#project-solar, #project-sharebite) { --project-accent: 251, 146, 60; --project-accent-dark: #c2410c; }
 
 #project-churn,
-#project-solar {
+:is(#project-solar, #project-sharebite) {
     border-color: rgba(var(--project-accent), 0.4);
     box-shadow: 0 0 10px rgba(var(--project-accent), 0.1);
 }
 #project-churn:hover,
-#project-solar:hover {
+:is(#project-solar, #project-sharebite):hover {
     border-color: rgb(var(--project-accent));
     box-shadow: 0 0 15px rgba(var(--project-accent), 0.4);
 }
 #project-churn .project-badge,
-#project-solar .project-badge,
+:is(#project-solar, #project-sharebite) .project-badge,
 #project-churn .tech-tag,
-#project-solar .tech-tag {
+:is(#project-solar, #project-sharebite) .tech-tag {
     color: rgb(var(--project-accent));
     border-color: rgba(var(--project-accent), 0.3);
     background: rgba(var(--project-accent), 0.05);
 }
 #project-churn .project-features i,
-#project-solar .project-features i {
+:is(#project-solar, #project-sharebite) .project-features i {
     color: rgb(var(--project-accent));
 }
 #project-churn .tech-tag:hover,
-#project-solar .tech-tag:hover {
+:is(#project-solar, #project-sharebite) .tech-tag:hover {
     border-color: rgb(var(--project-accent));
     box-shadow: 0 0 10px rgba(var(--project-accent), 0.5);
     background: rgba(var(--project-accent), 0.1);
 }
 #project-churn .demo-link,
-#project-solar .demo-link {
+:is(#project-solar, #project-sharebite) .demo-link {
     background: linear-gradient(135deg, var(--project-accent-dark), var(--project-accent-dark));
     color: #fff;
     box-shadow: 0 4px 15px rgba(var(--project-accent), 0.3);
@@ -1172,27 +1172,27 @@ main{
 
 /* Distinct accents for the latest timeline projects. */
 .timeline-item:has(#timeline-churn) { --timeline-accent: 96, 165, 250; }
-.timeline-item:has(#timeline-solar) { --timeline-accent: 251, 146, 60; }
+.timeline-item:has(:is(#timeline-solar, #timeline-sharebite)) { --timeline-accent: 251, 146, 60; }
 
 #timeline-churn,
-#timeline-solar {
+:is(#timeline-solar, #timeline-sharebite) {
     border-color: rgba(var(--timeline-accent), 0.45);
     background: linear-gradient(135deg, rgba(var(--timeline-accent), 0.08), rgba(255, 255, 255, 0.015));
 }
 
 #timeline-churn .timeline-date,
-#timeline-solar .timeline-date {
+:is(#timeline-solar, #timeline-sharebite) .timeline-date {
     color: rgb(var(--timeline-accent));
 }
 
 .timeline-item:has(#timeline-churn) .timeline-dot-glow,
-.timeline-item:has(#timeline-solar) .timeline-dot-glow {
+.timeline-item:has(:is(#timeline-solar, #timeline-sharebite)) .timeline-dot-glow {
     background: rgb(var(--timeline-accent)) !important;
     box-shadow: 0 0 15px rgba(var(--timeline-accent), 0.8) !important;
 }
 
 #timeline-churn:hover,
-#timeline-solar:hover {
+:is(#timeline-solar, #timeline-sharebite):hover {
     transform: translateY(-4px);
     border-color: rgb(var(--timeline-accent));
     box-shadow: 0 0 25px rgba(var(--timeline-accent), 0.3), 0 15px 40px rgba(var(--timeline-accent), 0.15);
@@ -1948,3 +1948,7 @@ section[id] { scroll-margin-top: 90px; }
     .content { margin-top: 0; max-width: min(40rem, 52vw); }
     .robot-3d { right: 0; top: 0; scale: 1; width: 44%; height: 650px; }
 }
+
+/* ShareBite uses an orchid accent across the card, timeline and buttons. */
+#project-sharebite { --project-accent: 232, 121, 249; --project-accent-dark: #a21caf; }
+.timeline-item:has(#timeline-sharebite) { --timeline-accent: 232, 121, 249; }
